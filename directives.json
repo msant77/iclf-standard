@@ -21,7 +21,7 @@
       "unique": true,
       "validation": {
         "type": "string",
-        "pattern": "^A-G (?:#|b)?(?:m|maj|min|dim|°|aug|sus2|sus4)?$",
+        "pattern": "^[A-G](?:#|b)?(?:m|maj|min|dim|°|aug|sus2|sus4)?$",
         "description": "Must be a musical key: A-G, optional # or b, optional m, maj, min, dim, °, aug, sus2, or sus4 (e.g., C, Am, F#, Bbmaj)."
       }
     },
@@ -147,8 +147,8 @@
     "validation": {
       "chord": {
         "type": "string",
-        "pattern": "^A-G (?:#|b)?(?:m|maj|min|dim|°|aug|sus2|sus4|add9)?(?:6|7|9|11|13)?(?:\\((?:b|#)?(?:5|9|11|13)\\))?(?:/A-G (?:#|b)?)?$",
-        "description": "Must be a valid chord: A-G, optional # or b, optional quality (m, maj, min, dim, °, aug, sus2, sus4, add9), optional extension (6, 7, 9, 11, 13), optional altered note ((b5), (#9), etc.), optional bass note (/E) (e.g., C, Am, D7(b9)13, Dmaj9, C6, D9)."
+        "pattern": "^(?:N\\.C\\.|[A-G][#b]?(?:m|min)?(?:maj|dim|°|ø|\\+|aug)?(?:sus[24])?(?:6|7|9|11|13)?(?:sus[24])?(?:add(?:9|11|13))?(?:(?:\\()?[b#](?:5|9|11|13)(?:\\))?)*(?:/[A-G][#b]?)?)$",
+        "description": "Must be a valid chord: N.C. (no chord), or root (A-G), optional accidental (# or b), optional minor (m or min), optional quality (maj, dim, °, ø, +, aug), optional suspension (sus2, sus4), optional extension (6, 7, 9, 11, 13), optional add (add9, add11, add13), optional alterations (b5, #5, b9, #9, #11, b13 with optional parentheses), optional bass note (/E). Examples: C, Am, Cmaj7, Cmmaj7, C7sus4, Cadd9, C7b9, Dm7b5, Bb7/Ab, N.C."
       }
     },
     "attributes": [
@@ -194,7 +194,7 @@
         "example": "A-C-E",
         "validation": {
           "type": "string",
-          "pattern": "^A-G (?:#|b)?(?:-A-G (?:#|b)?)*$",
+          "pattern": "^[A-G](?:#|b)?(?:-[A-G](?:#|b)?)*$",
           "description": "Must be one or more musical notes separated by hyphens (A-G, optional # or b) (e.g., G, A-C-E)."
         }
       }
