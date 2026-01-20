@@ -53,6 +53,55 @@ while IFS= read -r attr; do
     chords_section+="*Example*: $example"$'\n\n'
     chords_section+="*Validation*: $validation"$'\n\n'
 done < <(echo "$chords" | jq -c '.attributes[]')
+
+# Generate Chord Variations section
+variations_section=""
+if echo "$chords" | jq -e '.variations' > /dev/null 2>&1; then
+    variations_section="### Chord Variations"$'\n\n'"The following variations are supported in chord notation:"$'\n\n'
+
+    # Get unique tags
+    tags=$(echo "$chords" | jq -r '.variations[].tags[]' | sort -u)
+
+    for tag in $tags; do
+        # Capitalize tag for header
+        tag_header=$(echo "$tag" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')
+        variations_section+="#### $tag_header"$'\n\n'
+        variations_section+="| Name | Symbol | Description | Examples |"$'\n'
+        variations_section+="|------|--------|-------------|----------|"$'\n'
+
+        while IFS= read -r var; do
+            name=$(echo "$var" | jq -r '.name')
+            symbol=$(echo "$var" | jq -r '.symbol // .values // "-"')
+            # Handle arrays for symbol/values
+            if echo "$symbol" | jq -e 'type == "array"' > /dev/null 2>&1; then
+                symbol=$(echo "$symbol" | jq -r 'join(", ")')
+            fi
+            desc=$(echo "$var" | jq -r '.description')
+            examples=$(echo "$var" | jq -r '.examples // [] | join(", ")')
+            # Escape pipes in description
+            desc=$(echo "$desc" | sed 's/|/\\|/g')
+
+            variations_section+="| \`$name\` | \`$symbol\` | $desc | $examples |"$'\n'
+        done < <(echo "$chords" | jq -c --arg tag "$tag" '.variations[] | select(.tags[] == $tag)')
+
+        variations_section+=$'\n'
+    done
+
+    # Add bass line patterns if present
+    patterns=$(echo "$chords" | jq -c '.variations[] | select(.name == "bass-line") | .patterns // empty')
+    if [ -n "$patterns" ]; then
+        variations_section+="#### Common Bass Line Patterns"$'\n\n'
+        variations_section+="| Pattern | Sequence |"$'\n'
+        variations_section+="|---------|----------|"$'\n'
+        while IFS= read -r pattern; do
+            pname=$(echo "$pattern" | jq -r '.name')
+            seq=$(echo "$pattern" | jq -r '.sequence | join(" → ")')
+            variations_section+="| $pname | $seq |"$'\n'
+        done < <(echo "$chords" | jq -c '.variations[] | select(.name == "bass-line") | .patterns[]')
+        variations_section+=$'\n'
+    fi
+fi
+
 cat << EOF > README.md
 # Inline Chorded Lyrics Format (ICLF) Specification v$version
 
@@ -79,7 +128,7 @@ ICLF is a secular, genre-agnostic format, unaffiliated with other organizations 
 $directives_section
 
 $chords_section
-
+$variations_section
 ## Notes
 Notes are annotations for performance tips, reminders, or custom metadata:
 - **# Notes**: Simple comments prefixed with \`#\` (e.g., \`# Strum gently\`). Display as italicized text or in a dedicated UI section. Any text following \`#\` is valid (whitespace trimmed).
