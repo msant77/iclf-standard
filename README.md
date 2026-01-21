@@ -211,7 +211,7 @@ Directives are reserved `{key: value}` pairs with defined roles, listed in [`dir
 Notates a chord aligned with a syllable or word. Optional attributes specify inversions, voicings, or performance details.
 
 - **Syntax**: `[Chord[:Attribute, Value][Attribute2, Value2]]`
-- **Validation**: Must be a valid chord: A-G, optional # or b, optional quality (m, maj, min, dim, °, aug, sus2, sus4, add9), optional extension (6, 7, 9, 11, 13), optional altered note ((b5), (#9), etc.), optional bass note (/E) (e.g., C, Am, D7(b9)13, Dmaj9, C6, D9).
+- **Validation**: Must be a valid chord: N.C. (no chord), or root (A-G), optional accidental (# or b), optional minor (m or min), optional quality (maj, dim, °, ˚, ø, +, aug), optional suspension (sus2, sus4), optional extension (6, 7, 9, 11, 13), optional add (add9, add11, add13), optional alterations (b5, #5, b9, #9, #11, b13 with optional parentheses), optional bass note (/E). Examples: C, Am, Cmaj7, Cmmaj7, C7sus4, Cadd9, C7b9, Dm7b5, Bb7/Ab, N.C.
 - **Instructions**: Display the chord above or before the associated text. Parse attributes to adjust display (e.g., show C/E for [C:inversion, 1]). No diagrams in v1.0.
 
 ### Chord Attributes
@@ -256,6 +256,152 @@ Notates a chord aligned with a syllable or word. Optional attributes specify inv
 
 *Validation*: Must be one or more musical notes separated by hyphens (A-G, optional # or b) (e.g., G, A-C-E).
 
+
+### Chord Variations
+
+The following variations are supported in chord notation:
+
+#### Accidental
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `sharp` | `#` | Sharp accidental | C#, F#, G#, A#, D#, E#, B# |
+| `flat` | `b` | Flat accidental | Bb, Eb, Ab, Db, Gb, Cb, Fb |
+
+#### Add
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `add9` | `add9` | Added 9th without 7th | Cadd9, Gadd9, Amadd9, Dadd9 |
+| `add11` | `add11` | Added 11th | Cadd11, Dadd11, Gadd11 |
+| `add13` | `add13` | Added 13th | Cadd13, Dadd13 |
+
+#### Alteration
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `b5` | `b5` | Flat 5th alteration | C7b5, G7b5, Dm7b5 |
+| `#5` | `#5` | Sharp 5th alteration | C7#5, G7#5, E7#5 |
+| `b9` | `b9` | Flat 9th alteration | C7b9, G7b9, B7b9, C7(b9) |
+| `#9` | `#9` | Sharp 9th alteration (Hendrix chord) | C7#9, E7#9, G7#9, C7(#9) |
+| `#11` | `#11` | Sharp 11th alteration (lydian dominant) | C7#11, F7#11, Cmaj7#11, C7(#11) |
+| `b13` | `b13` | Flat 13th alteration | C7b13, A7b13, G7b13, A7(b13) |
+
+#### Augmented
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `augmented-aug` | `aug` | Augmented chord using aug suffix | Caug, Gaug, Eaug |
+| `augmented-plus` | `+` | Augmented chord using + symbol | C+, G+, E+ |
+
+#### Basic
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `root` | `A, B, C, D, E, F, G` | Root notes A through G |  |
+
+#### Bass
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `slash` | `/` | Chord with specified bass note. The note after / indicates the lowest note to play, which may be a chord tone (inversion) or non-chord tone (added bass). Commonly used for bass lines and voice leading. | C/E, C/G, Am/G, G/B, D/F#, C/Bb, Bb7/Ab, Ebmmaj7/Gb |
+| `bass-line` | `-` | Slash chords used in sequence to create melodic bass movement. Common patterns include descending (C → C/B → Am → Am/G), ascending (Am → Am/B → C), and chromatic lines (C → C/B → C/Bb → C/A). Essential for voice leading in folk, pop, jazz, and bossa nova. | C/B, Am/G, Am/F#, D/F#, G/F, Em/D, C/Bb, Dm/C, Fmaj7/E, E7/G# |
+
+#### Diminished
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `diminished-dim` | `dim` | Diminished chord using dim suffix | Cdim, Bdim, Fdim, Cdim7 |
+| `diminished-degree` | `°` | Diminished chord using ° (degree sign U+00B0) | C°, B°, F°, C°7 |
+| `diminished-ring` | `˚` | Diminished chord using ˚ (ring above U+02DA) | C˚, B˚, F˚, C˚7 |
+
+#### Extension
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `6th` | `6` | 6th chord - adds major 6th to triad | C6, Am6, Gm6, Dm6, Ebm6 |
+| `7th` | `7` | 7th chord - adds 7th degree | C7, Cm7, Cmaj7, Cdim7, Am7, G7, Bb7 |
+| `9th` | `9` | 9th chord - extends through 9th degree | C9, Cm9, Cmaj9, G9, Am9 |
+| `11th` | `11` | 11th chord - extends through 11th degree | C11, Cm11, G11, Am11 |
+| `13th` | `13` | 13th chord - extends through 13th degree | C13, Cm13, G13, D13 |
+
+#### Half Diminished
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `half-diminished-ø` | `ø` | Half-diminished chord using ø symbol | Cø, Dø7, F#ø, Bø |
+| `half-diminished-m7b5` | `m7b5` | Half-diminished chord using m7b5 notation | Dm7b5, F#m7b5, Bm7b5, Em7b5 |
+
+#### Major
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `major` | `maj` | Explicit major quality | Cmaj, Cmaj7, Cmaj9, Bbmaj7, Ebmaj7, Fmaj7 |
+
+#### Minor
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `minor-m` | `m` | Minor chord using m suffix | Am, Dm, Em, Bm, F#m, C#m, Gm |
+| `minor-min` | `min` | Minor chord using min suffix | Amin, Dmin, Emin |
+
+#### Minor Major
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `minor-major` | `mmaj7` | Minor chord with major 7th | Cmmaj7, Ammaj7, Ebmmaj7, Ebmmaj7/Gb |
+
+#### Pattern
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `bass-line` | `-` | Slash chords used in sequence to create melodic bass movement. Common patterns include descending (C → C/B → Am → Am/G), ascending (Am → Am/B → C), and chromatic lines (C → C/B → C/Bb → C/A). Essential for voice leading in folk, pop, jazz, and bossa nova. | C/B, Am/G, Am/F#, D/F#, G/F, Em/D, C/Bb, Dm/C, Fmaj7/E, E7/G# |
+
+#### Quality
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `minor-m` | `m` | Minor chord using m suffix | Am, Dm, Em, Bm, F#m, C#m, Gm |
+| `minor-min` | `min` | Minor chord using min suffix | Amin, Dmin, Emin |
+| `diminished-dim` | `dim` | Diminished chord using dim suffix | Cdim, Bdim, Fdim, Cdim7 |
+| `diminished-degree` | `°` | Diminished chord using ° (degree sign U+00B0) | C°, B°, F°, C°7 |
+| `diminished-ring` | `˚` | Diminished chord using ˚ (ring above U+02DA) | C˚, B˚, F˚, C˚7 |
+| `half-diminished-ø` | `ø` | Half-diminished chord using ø symbol | Cø, Dø7, F#ø, Bø |
+| `half-diminished-m7b5` | `m7b5` | Half-diminished chord using m7b5 notation | Dm7b5, F#m7b5, Bm7b5, Em7b5 |
+| `augmented-aug` | `aug` | Augmented chord using aug suffix | Caug, Gaug, Eaug |
+| `augmented-plus` | `+` | Augmented chord using + symbol | C+, G+, E+ |
+| `major` | `maj` | Explicit major quality | Cmaj, Cmaj7, Cmaj9, Bbmaj7, Ebmaj7, Fmaj7 |
+| `minor-major` | `mmaj7` | Minor chord with major 7th | Cmmaj7, Ammaj7, Ebmmaj7, Ebmmaj7/Gb |
+
+#### Slash
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `slash` | `/` | Chord with specified bass note. The note after / indicates the lowest note to play, which may be a chord tone (inversion) or non-chord tone (added bass). Commonly used for bass lines and voice leading. | C/E, C/G, Am/G, G/B, D/F#, C/Bb, Bb7/Ab, Ebmmaj7/Gb |
+| `bass-line` | `-` | Slash chords used in sequence to create melodic bass movement. Common patterns include descending (C → C/B → Am → Am/G), ascending (Am → Am/B → C), and chromatic lines (C → C/B → C/Bb → C/A). Essential for voice leading in folk, pop, jazz, and bossa nova. | C/B, Am/G, Am/F#, D/F#, G/F, Em/D, C/Bb, Dm/C, Fmaj7/E, E7/G# |
+
+#### Special
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `no-chord` | `N.C.` | No chord / tacet - indicates silence or no accompaniment | N.C. |
+
+#### Suspended
+
+| Name | Symbol | Description | Examples |
+|------|--------|-------------|----------|
+| `sus2` | `sus2` | Suspended 2nd - replaces 3rd with 2nd | Csus2, Dsus2, Asus2, Gsus2 |
+| `sus4` | `sus4` | Suspended 4th - replaces 3rd with 4th | Csus4, Dsus4, Gsus4, G7sus4, D7sus4 |
+
+#### Common Bass Line Patterns
+
+| Pattern | Sequence |
+|---------|----------|
+| descending major | C → C/B → Am → Am/G → F |
+| descending minor | Am → Am/G → Am/F# → Fmaj7 |
+| ascending | Am → Am/B → C → C/D → G |
+| chromatic descent | C → C/B → C/Bb → C/A |
+| jazz turnaround | Cmaj7 → Am7 → Dm7 → G7/F → Em7 → A7/C# |
 
 
 ## Notes
