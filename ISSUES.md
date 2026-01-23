@@ -17,7 +17,15 @@ This file tracks intended GitHub issues before creation.
 - **Acceptance Criteria:**
   - [x] Add `maracatu-eta.iclf` from iclf-parser
   - [x] Review and resolve `aroma.iclf` version differences - kept iclf-standard version
-  - [ ] Add more diverse genre/language samples as needed (ongoing)
+
+### Add diverse genre/language samples `[GH: -]`
+- **Status:** Planned
+- **Labels:** `content`, `enhancement`
+- **Description:** Expand sample collection with diverse genres and languages
+- **Acceptance Criteria:**
+  - [ ] Add samples from different music genres (jazz, classical, folk, etc.)
+  - [ ] Add samples with non-English lyrics (Spanish, Portuguese, etc.)
+  - [ ] Add samples demonstrating advanced ICLF features
 
 ---
 
