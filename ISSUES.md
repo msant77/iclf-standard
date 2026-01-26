@@ -29,7 +29,7 @@ This file tracks intended GitHub issues before creation.
 
 ## Chord Validation
 
-### ~~Support Brazilian chord notation in chord regex~~ `[GH: #1]`
+### ~~Support Brazilian chord notation in chord regex~~ `[GH: #1 ✓]`
 - **Status:** Done ✅
 - **Labels:** `enhancement`, `content`
 - **Description:** The chord validation regex does not support Brazilian music notation conventions widely used in bossa nova and choro. These styles use extra-rich chord formations that differ from standard international notation.
