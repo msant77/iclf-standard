@@ -138,6 +138,34 @@
       "required": false,
       "example": "EADGBE",
       "unique": true
+    },
+    {
+      "name": "language",
+      "description": "Specifies the language of the lyrics.",
+      "instructions": "Display as metadata in the UI. Use for filtering and organizing songs by language.",
+      "scope": "global",
+      "required": false,
+      "example": "Portuguese",
+      "unique": true,
+      "validation": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z\\s-]*$",
+        "description": "Must be a language name (e.g., English, Portuguese, Spanish, French)."
+      }
+    },
+    {
+      "name": "genre",
+      "description": "Specifies the musical genre or style of the song.",
+      "instructions": "Display as metadata in the UI. Use for filtering and organizing songs by genre.",
+      "scope": "global",
+      "required": false,
+      "example": "Bossa Nova",
+      "unique": true,
+      "validation": {
+        "type": "string",
+        "pattern": "^[A-Za-z][A-Za-z0-9\\s&/-]*$",
+        "description": "Must be a genre name (e.g., Jazz, Rock, Bossa Nova, Folk, R&B)."
+      }
     }
   ],
   "chords": {
