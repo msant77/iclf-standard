@@ -166,6 +166,20 @@
         "pattern": "^[A-Za-z][A-Za-z0-9\\s&/-]*$",
         "description": "Must be a genre name (e.g., Jazz, Rock, Bossa Nova, Folk, R&B)."
       }
+    },
+    {
+      "name": "chord_voicing",
+      "description": "Stores a preferred chord voicing as a fret string. Multiple allowed.",
+      "instructions": "When displaying chord diagrams, prefer the voicing stored here over computed defaults. The value is 'ChordName, FretString' where FretString uses x for muted, 0 for open, and fret numbers.",
+      "scope": "global",
+      "required": false,
+      "example": "Am, x02210",
+      "unique": false,
+      "validation": {
+        "type": "string",
+        "pattern": "^[A-G][^,]*,\\s*[x0-9]+$",
+        "description": "Must be 'ChordName, FretString' where ChordName is a valid chord and FretString is a sequence of x, 0, and digits (e.g., Am, x02210)."
+      }
     }
   ],
   "chords": {

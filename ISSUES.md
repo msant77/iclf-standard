@@ -47,6 +47,14 @@ This file tracks intended GitHub issues before creation.
   - [x] Update chord regex in `directives.json` to support all Brazilian conventions
   - [x] Update regex description to document new patterns
 
+### ✅ Add chord_voicing directive for preferred voicings `[GH: #4]`
+- **Status:** Done
+- **Labels:** `feature`, `directive`
+- **Description:** New `{chord_voicing: ChordName, FretString}` directive stores user-preferred chord voicings. Multiple allowed per file.
+- **Acceptance Criteria:**
+  - [x] Directive definition added to directives.json
+  - [x] Validation pattern for chord name + fret string
+
 ### ✅ Add support for Brazilian 7+ and bare compound interval notation `[GH: #3]`
 - **Status:** Done
 - **Labels:** `feature`, `chord-spec`
