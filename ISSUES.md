@@ -47,6 +47,15 @@ This file tracks intended GitHub issues before creation.
   - [x] Update chord regex in `directives.json` to support all Brazilian conventions
   - [x] Update regex description to document new patterns
 
+### ✅ Add support for Brazilian 7+ and bare compound interval notation `[GH: #3]`
+- **Status:** Done
+- **Labels:** `feature`, `chord-spec`
+- **Description:** Added `7+` (Brazilian maj7) and bare compound interval notation (`D7/9`, `C7/13`) to the chord regex. Added Toca de Tatu sample file.
+- **Acceptance Criteria:**
+  - [x] Regex updated in directives.json
+  - [x] Description updated with new examples
+  - [x] Toca de Tatu sample file added
+
 ---
 
 ## Issue Template
