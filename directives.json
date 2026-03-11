@@ -160,12 +160,7 @@
       "scope": "global",
       "required": false,
       "example": "Bossa Nova",
-      "unique": true,
-      "validation": {
-        "type": "string",
-        "pattern": "^[A-Za-z][A-Za-z0-9\\s&/-]*$",
-        "description": "Must be a genre name (e.g., Jazz, Rock, Bossa Nova, Folk, R&B)."
-      }
+      "unique": true
     },
     {
       "name": "chord_voicing",
