@@ -2,6 +2,7 @@
 {key: A}
 {composer: João Bosco / Aldir Blanc}
 {tempo: 120}
+{difficulty: advanced}
 # Reference sample for Brazilian 7+ and /9 chord notation
 {section: Intro}
 [A7+]  [D7/9]  [A7+]  [D7/9]

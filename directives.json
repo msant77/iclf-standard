@@ -163,6 +163,20 @@
       "unique": true
     },
     {
+      "name": "difficulty",
+      "description": "Indicates the difficulty level of the song for players.",
+      "instructions": "Display as a small badge or chip in the UI. Use for filtering and sorting songs by difficulty.",
+      "scope": "global",
+      "required": false,
+      "example": "beginner",
+      "unique": true,
+      "validation": {
+        "type": "string",
+        "pattern": "^(beginner|intermediate|advanced)$",
+        "description": "Must be one of: beginner, intermediate, advanced."
+      }
+    },
+    {
       "name": "chord_voicing",
       "description": "Stores a preferred chord voicing as a fret string. Multiple allowed.",
       "instructions": "When displaying chord diagrams, prefer the voicing stored here over computed defaults. The value is 'ChordName, FretString' where FretString uses x for muted, 0 for open, and fret numbers.",
